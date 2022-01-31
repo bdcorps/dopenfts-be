@@ -1,0 +1,21 @@
+{
+  "name": "dopenfts-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "sinon": "^7.4.2"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
+}
