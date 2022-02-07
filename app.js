@@ -3,11 +3,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
-const BookService = require("./book");
+const BookService = require("./nft");
 
 var app = express();
-
-mongoose.Promise = global.Promise;
 
 var uri = "mongodb://localhost:27017/bookstore";
 mongoose.connect(uri, {
@@ -18,7 +16,10 @@ mongoose.connect(uri, {
 // Allow all CORS
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
@@ -53,4 +54,4 @@ app.get("/addBook", async function (req, res, next) {
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.listen(port, () => console.log(`Listening on port ${port}!`));
