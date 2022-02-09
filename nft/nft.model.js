@@ -6,7 +6,8 @@ var nftSchema = new Schema({
   name: String,
   image: String,
   wallet_address: String,
-  likes: Number
+  likes: Number,
+  shown_to_user: Number,
 });
 
 var nftModel = mongoose.model("nft", nftSchema);
