@@ -1,13 +1,14 @@
 "use strict";
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+const env = require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const nftService = require("./nft/index.js");
+const app = express();
 
-const BookService = require("./nft");
+console.log(process.env.DB_NAME);
 
-var app = express();
-
-var uri = "mongodb://localhost:27017/bookstore";
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.dipta.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 mongoose.connect(uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -30,11 +31,13 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.get("/listBooks", async function (req, res, next) {
+app.get("/listNFTs", async function (req, res, next) {
   try {
-    const books = await BookService.listBooks();
-    res.json(books);
+    console.log(`New Request from ${req.url}`);
+    const nfts = await nftService.listNFT();
+    res.json(nfts);
   } catch (e) {
+    console.log(e);
     next(e);
   }
 });

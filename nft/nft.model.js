@@ -10,6 +10,6 @@ var nftSchema = new Schema({
   shown_to_user: Number,
 });
 
-var nftModel = mongoose.model("nft", nftSchema);
+var nftModel = mongoose.model("NFTs", nftSchema);
 
 module.exports = nftModel;
