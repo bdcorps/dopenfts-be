@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const nftService = require("./nft/index.js");
+const nft = require("./nft/index.js");
 const app = express();
 
 console.log(process.env.DB_NAME);
@@ -42,7 +43,25 @@ app.get("/listNFTs", async function (req, res, next) {
   }
 });
 
-app.get("/addBook", async function (req, res, next) {
+app.get("/tworandom", async function (req, res, next) {
+  try {
+    const random1 = await nftService.randomNFT();
+    let random2 = await nftService.randomNFT();
+
+    while (random1._id === random2._id) {
+      random2 = await nftService.randomNFT();
+    }
+
+    res.json([random1, random2]);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+});
+
+// To be worked on
+
+/* app.get("/addBook", async function (req, res, next) {
   const title = req.query.title;
   const author = req.query.author;
   const rating = req.query.rating;
@@ -53,7 +72,7 @@ app.get("/addBook", async function (req, res, next) {
   } catch (e) {
     next(e);
   }
-});
+}); */
 
 const port = process.env.PORT || 3000;
 
