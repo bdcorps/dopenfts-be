@@ -36,6 +36,7 @@ app.get("/listNFTs", async function (req, res, next) {
   try {
     console.log(`New Request from ${req.url}`);
     const nfts = await nftService.listNFT();
+    res.setHeader("content-type", "application/json");
     res.json(nfts);
   } catch (e) {
     console.log(e);
